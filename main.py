@@ -1,6 +1,6 @@
 import openpyxl
 from openpyxl.styles import PatternFill, Font
-import pandas as pd
+import pandas
 
 book_que= openpyxl.load_workbook("doc_que.xlsx")
 sheet=book_que['Sheet1']
@@ -73,20 +73,20 @@ for i in range(3, (len(round_trips)+2)):
 for i in range(0, len(a)):
     for j in range(0, len(b)):
         if (a[i] == b[j]):
-            budjet=round_trips[i+1]*2+phone_minutes[j+1]*0.05
-            if(budjet==11):
+            budget=round_trips[i+1]*2+phone_minutes[j+1]*0.05
+            if(budget==11):
                 sheet.cell(i+3,4).fill=fill_col1
                 sheet.cell(j+3,8).fill=fill_col1
                 sheet.cell(i+3,4).font=Font(bold=True)
                 sheet.cell(j+3,8).font=Font(bold=True)
-                print(round_trips[i+1],'* $2 +',phone_minutes[j+1],'* $0.05 = ', budjet)
+                print(round_trips[i+1],'* $2 +',phone_minutes[j+1],'* $0.05 = ', budget)
                 print("Suitable\n")
             else:
                 sheet.cell(i+3,4).fill=fill_col2
                 sheet.cell(j+3,8).fill=fill_col2
                 sheet.cell(i+3,4).font=Font(bold=True)
                 sheet.cell(j+3,8).font=Font(bold=True)
-                print(round_trips[i+1],'* $2 +',phone_minutes[j+1],'* $0.05 = ', budjet)
+                print(round_trips[i+1],'* $2 +',phone_minutes[j+1],'* $0.05 = ', budget)
                 print("Not Suitable\n")
             continue
         else:
@@ -94,6 +94,6 @@ for i in range(0, len(a)):
 
 book_que.save('book_ans.xlsx')
 
-xl_file=pd.ExcelFile('book_ans.xlsx')
-sheet_out=pd.read_excel(xl_file)
+xl_file=pandas.ExcelFile('book_ans.xlsx')
+sheet_out=pandas.read_excel(xl_file)
 print(sheet_out.head(11))
